@@ -75,3 +75,9 @@ En produccion debes cerrar estas reglas y autenticar a los clientes antes de per
 
 - `npm run typecheck`
 - `npx expo start`
+
+## Notas de prueba
+
+- Si la camara devuelve una URL fija, la app agrega un query param para forzar refresco cada segundo.
+- Si Firebase aun no tiene nodos creados, la app muestra estados vacios y advertencias en lugar de fallar.
+- La escritura de bombas se bloquea cuando `hayAgua` es `false`.
