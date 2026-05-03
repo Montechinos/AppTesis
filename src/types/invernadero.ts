@@ -33,12 +33,6 @@ export interface ControlData {
   bomba2: boolean;
 }
 
-export interface CameraData {
-  ip: string;
-  capture: string;
-  actualizado: string;
-}
-
 export interface SensorSnapshot {
   id: string;
   timestamp: number;
