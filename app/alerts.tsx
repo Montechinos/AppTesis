@@ -4,6 +4,7 @@ import { SectionHeading } from '@/src/components/atoms/SectionHeading';
 import { useGreenhouse } from '@/src/context/GreenhouseProvider';
 import { ConnectionBanner } from '@/src/components/molecules/ConnectionBanner';
 import { AlertsPanel } from '@/src/components/organisms/AlertsPanel';
+import { AlertsSummary } from '@/src/components/organisms/AlertsSummary';
 
 export default function AlertsScreen() {
   const state = useGreenhouse();
@@ -19,6 +20,7 @@ export default function AlertsScreen() {
         title="Centro de alertas"
       />
       <ConnectionBanner isChecking={state.isChecking} isOffline={state.isOffline} />
+      <AlertsSummary alerts={state.alerts} />
       <AlertsPanel alerts={state.alerts} />
     </ScreenView>
   );
