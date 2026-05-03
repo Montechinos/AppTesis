@@ -9,7 +9,7 @@ type Props = {
 };
 
 export const SoilStatusPanel = ({ sensors }: Props) => (
-  <View style={{ flexDirection: 'row', gap: 12 }}>
+  <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 12 }}>
     <View style={{ flex: 1 }}>
       <MetricCard
         detail="Zona de riego 1"
