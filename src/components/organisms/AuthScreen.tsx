@@ -44,7 +44,7 @@ export const AuthScreen = () => {
     return (
       <AuthFrame backgroundColor={colors.background}>
         <Animated.View layout={LinearTransition.springify()} style={styles.authShell}>
-          <SurfaceCard>
+          <SurfaceCard style={styles.authCard}>
             <AppText style={styles.title} weight="bold">
               Verifica tu correo
             </AppText>
@@ -98,7 +98,7 @@ export const AuthScreen = () => {
   return (
     <AuthFrame backgroundColor={colors.background}>
       <Animated.View layout={LinearTransition.springify()} style={styles.authShell}>
-        <SurfaceCard>
+        <SurfaceCard style={styles.authCard}>
           <Animated.View
             entering={FadeInRight.duration(260)}
             exiting={FadeOutLeft.duration(180)}
@@ -194,6 +194,9 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     maxWidth: 420,
     width: '100%',
+  },
+  authCard: {
+    padding: spacing.xl,
   },
   centerContent: {
     flex: 1,

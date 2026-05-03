@@ -1,14 +1,15 @@
 import { ReactNode } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 
 import { useThemeMode } from '@/src/hooks/useThemeMode';
 import { radius, spacing } from '@/src/theme/spacing';
 
 type Props = {
   children: ReactNode;
+  style?: StyleProp<ViewStyle>;
 };
 
-export const SurfaceCard = ({ children }: Props) => {
+export const SurfaceCard = ({ children, style }: Props) => {
   const { colors } = useThemeMode();
 
   return (
@@ -20,6 +21,7 @@ export const SurfaceCard = ({ children }: Props) => {
           borderColor: colors.border,
           shadowColor: colors.shadow,
         },
+        style,
       ]}
     >
       {children}
