@@ -10,6 +10,7 @@ import { SectionHeading } from '@/src/components/atoms/SectionHeading';
 import { SurfaceCard } from '@/src/components/molecules/SurfaceCard';
 import { useAuth } from '@/src/hooks/useAuth';
 import { useThemeMode } from '@/src/hooks/useThemeMode';
+import { spacing } from '@/src/theme/spacing';
 import { validatePassword } from '@/src/utils/validators';
 
 export default function SettingsScreen() {
