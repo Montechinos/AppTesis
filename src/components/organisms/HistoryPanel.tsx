@@ -1,5 +1,6 @@
 import { View } from 'react-native';
 
+import { Divider } from '@/src/components/atoms/Divider';
 import { AppText } from '@/src/components/atoms/AppText';
 import { EmptyState } from '@/src/components/atoms/EmptyState';
 import { HistoryRow } from '@/src/components/molecules/HistoryRow';
@@ -31,6 +32,7 @@ export const HistoryPanel = ({ history }: Props) => {
       />
       <View style={{ gap: 8 }}>
         <AppText weight="semibold">Ultimas lecturas</AppText>
+        <Divider />
         {history.slice().reverse().map((item) => (
           <HistoryRow item={item} key={item.id} />
         ))}
