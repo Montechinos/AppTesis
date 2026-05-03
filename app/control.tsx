@@ -3,6 +3,7 @@ import { SectionHeading } from '@/src/components/atoms/SectionHeading';
 import { useGreenhouse } from '@/src/context/GreenhouseProvider';
 import { AlertBanner } from '@/src/components/molecules/AlertBanner';
 import { ConnectionBanner } from '@/src/components/molecules/ConnectionBanner';
+import { InfoBanner } from '@/src/components/molecules/InfoBanner';
 import { ControlPanel } from '@/src/components/organisms/ControlPanel';
 
 export default function ControlScreen() {
@@ -25,9 +26,11 @@ export default function ControlScreen() {
           }}
         />
       ) : null}
+      {state.savingKey ? <InfoBanner message={`Guardando ${state.savingKey}...`} /> : null}
       <ControlPanel
         control={state.control}
         hasWater={state.sensors.hayAgua}
+        savingKey={state.savingKey}
         onToggle={state.setToggle}
       />
     </ScreenView>
