@@ -1,11 +1,15 @@
 import { useState } from 'react';
 import { KeyboardAvoidingView, Platform, StyleSheet, View } from 'react-native';
+import Animated, { FadeInRight, FadeOutLeft, LinearTransition } from 'react-native-reanimated';
 
 import { AppButton } from '@/src/components/atoms/AppButton';
 import { AppText } from '@/src/components/atoms/AppText';
-import { AppTextInput } from '@/src/components/atoms/AppTextInput';
 import { LoadingState } from '@/src/components/atoms/LoadingState';
 import { ScreenView } from '@/src/components/atoms/ScreenView';
+import { AuthButton } from '@/src/components/molecules/auth/AuthButton';
+import { AuthHeader } from '@/src/components/molecules/auth/AuthHeader';
+import { AuthInput } from '@/src/components/molecules/auth/AuthInput';
+import { AuthSwitcher } from '@/src/components/molecules/auth/AuthSwitcher';
 import { SurfaceCard } from '@/src/components/molecules/SurfaceCard';
 import { useAuth } from '@/src/hooks/useAuth';
 import { spacing } from '@/src/theme/spacing';
@@ -83,54 +87,89 @@ export const AuthScreen = () => {
   return (
     <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : undefined} style={styles.flex}>
       <ScreenView>
-        <SurfaceCard>
-          <AppText style={styles.title} weight="bold">
-            Invernadero inteligente
-          </AppText>
-          <AppText tone="muted">
-            {isRegister ? 'Crea tu cuenta para entrar al panel.' : 'Ingresa con tu cuenta Supabase.'}
-          </AppText>
+        <Animated.View layout={LinearTransition.springify()} style={styles.authShell}>
+          <SurfaceCard>
+            <Animated.View
+              entering={FadeInRight.duration(260)}
+              exiting={FadeOutLeft.duration(180)}
+              key={mode}
+              style={styles.form}
+            >
+              <AuthHeader
+                subtitle={
+                  isRegister
+                    ? 'Crea tu cuenta para comenzar'
+                    : 'Accede a tu invernadero inteligente'
+                }
+                title={isRegister ? 'Crear cuenta' : 'Iniciar sesión'}
+              />
 
-          <View style={styles.segment}>
-            <AppButton label="Register" onPress={() => setMode('register')} variant={isRegister ? 'primary' : 'secondary'} />
-            <AppButton label="Login" onPress={() => setMode('login')} variant={!isRegister ? 'primary' : 'secondary'} />
-          </View>
+              <View style={styles.fields}>
+                {isRegister ? (
+                  <AuthInput
+                    autoCapitalize="words"
+                    icon="account-outline"
+                    onChangeText={setName}
+                    placeholder="Nombre"
+                    value={name}
+                  />
+                ) : null}
+                <AuthInput
+                  autoCapitalize="none"
+                  icon="email-outline"
+                  keyboardType="email-address"
+                  onChangeText={setEmail}
+                  placeholder="Correo"
+                  value={email}
+                />
+                <AuthInput
+                  icon="lock-outline"
+                  onChangeText={setPassword}
+                  placeholder="Contraseña"
+                  secureTextEntry
+                  value={password}
+                />
+                {isRegister ? (
+                  <AuthInput
+                    icon="lock-check-outline"
+                    onChangeText={setConfirmPassword}
+                    placeholder="Confirmar contraseña"
+                    secureTextEntry
+                    value={confirmPassword}
+                  />
+                ) : null}
+              </View>
 
-          {isRegister ? (
-            <AppTextInput autoCapitalize="words" onChangeText={setName} placeholder="Nombre" value={name} />
-          ) : null}
-          <AppTextInput
-            autoCapitalize="none"
-            keyboardType="email-address"
-            onChangeText={setEmail}
-            placeholder="Correo"
-            value={email}
-          />
-          <AppTextInput onChangeText={setPassword} placeholder="Contraseña" secureTextEntry value={password} />
-          {isRegister ? (
-            <AppTextInput
-              onChangeText={setConfirmPassword}
-              placeholder="Confirmar contraseña"
-              secureTextEntry
-              value={confirmPassword}
-            />
-          ) : null}
+              {message ? <AppText style={styles.error}>{message}</AppText> : null}
+              {auth.error ? <AppText style={styles.error}>{auth.error}</AppText> : null}
 
-          {message ? <AppText style={styles.error}>{message}</AppText> : null}
-          {auth.error ? <AppText style={styles.error}>{auth.error}</AppText> : null}
-          <AppButton
-            label={isRegister ? 'Crear cuenta' : 'Entrar'}
-            onPress={submit}
-          />
-        </SurfaceCard>
+              <AuthButton label={isRegister ? 'Crear cuenta' : 'Iniciar sesión'} onPress={submit} />
+              <AuthSwitcher
+                action={isRegister ? 'Inicia sesión' : 'Regístrate'}
+                onPress={() => setMode(isRegister ? 'login' : 'register')}
+                prompt={isRegister ? '¿Ya tienes una cuenta? ' : '¿No tienes una cuenta? '}
+              />
+            </Animated.View>
+          </SurfaceCard>
+        </Animated.View>
       </ScreenView>
     </KeyboardAvoidingView>
   );
 };
 
 const styles = StyleSheet.create({
+  authShell: {
+    alignSelf: 'center',
+    maxWidth: 460,
+    width: '100%',
+  },
   error: { color: '#d9534f' },
+  fields: {
+    gap: spacing.sm,
+  },
   flex: { flex: 1 },
-  segment: { flexDirection: 'row', gap: spacing.sm },
+  form: {
+    gap: spacing.md,
+  },
   title: { fontSize: 28, lineHeight: 34 },
 });
