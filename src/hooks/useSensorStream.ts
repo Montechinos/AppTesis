@@ -16,7 +16,10 @@ export const useSensorStream = () => {
       setHistory((current) => appendSnapshot(current, buildSnapshot(nextData)));
       setLoading(false);
       setError('');
-    }, setError);
+    }, (message) => {
+      setError(message);
+      setLoading(false);
+    });
 
     return unsubscribe;
   }, []);
