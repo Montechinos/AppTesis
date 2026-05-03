@@ -10,6 +10,7 @@ import { SensorData } from '@/src/types/invernadero';
 import { ActivePlantConfig, PlantTargetStatus } from '@/src/types/plant';
 import { formatPercent, formatTemp } from '@/src/utils/formatters';
 import { getPlantPhaseLabel } from '@/src/utils/calculatePlantNeeds';
+import { getPlantTargetStatus } from '@/src/utils/plantTargetStatus';
 
 type Props = {
   activePlant: ActivePlantConfig;
@@ -22,12 +23,6 @@ type Comparison = {
   current: string;
   target: string;
   status: PlantTargetStatus;
-};
-
-const getStatus = (current: number, target: number, tolerance: number): PlantTargetStatus => {
-  if (current < target - tolerance) return 'bajo';
-  if (current > target + tolerance) return 'alto';
-  return 'ideal';
 };
 
 const statusTone: Record<PlantTargetStatus, 'success' | 'warning' | 'danger'> = {
@@ -49,19 +44,19 @@ export const ActivePlantPanel = ({ activePlant, onChangePlant, sensors }: Props)
       label: 'Temperatura',
       current: formatTemp(tempAverage),
       target: formatTemp(targets.temperaturaObjetivo),
-      status: getStatus(tempAverage, targets.temperaturaObjetivo, 1.5),
+      status: getPlantTargetStatus(tempAverage, targets.temperaturaObjetivo, 1.5),
     },
     {
       label: 'Humedad aire',
       current: formatPercent(airHumidityAverage),
       target: formatPercent(targets.humedadAireObjetivo),
-      status: getStatus(airHumidityAverage, targets.humedadAireObjetivo, 8),
+      status: getPlantTargetStatus(airHumidityAverage, targets.humedadAireObjetivo, 8),
     },
     {
       label: 'Humedad suelo',
       current: formatPercent(soilAverage),
       target: formatPercent(targets.humedadSueloObjetivo),
-      status: getStatus(soilAverage, targets.humedadSueloObjetivo, 8),
+      status: getPlantTargetStatus(soilAverage, targets.humedadSueloObjetivo, 8),
     },
   ];
 
