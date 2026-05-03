@@ -142,6 +142,12 @@ const RootContent = () => {
             tabBarIcon: ({ focused }) => <TabIcon focused={focused} name="cog-outline" />,
           }}
         />
+        <Tabs.Screen
+          name="+not-found"
+          options={{
+            href: null,
+          }}
+        />
       </Tabs>
     </GreenhouseProvider>
   );
