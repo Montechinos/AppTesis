@@ -1,6 +1,6 @@
 import { ReactNode, useState } from 'react';
 import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import Animated, { FadeInRight, FadeOutLeft, LinearTransition } from 'react-native-reanimated';
 
 import { AppButton } from '@/src/components/atoms/AppButton';
@@ -171,23 +171,41 @@ type AuthFrameProps = {
   children: ReactNode;
 };
 
-const AuthFrame = ({ backgroundColor, children }: AuthFrameProps) => (
-  <SafeAreaView style={[styles.safeArea, { backgroundColor }]}>
-    <NatureBackground />
-    <KeyboardAvoidingView
-      behavior={Platform.OS === 'ios' ? 'padding' : undefined}
-      style={styles.keyboardView}
+const AuthFrame = ({ backgroundColor, children }: AuthFrameProps) => {
+  const insets = useSafeAreaInsets();
+
+  return (
+    <SafeAreaView
+      edges={[]}
+      style={[
+        styles.safeArea,
+        {
+          backgroundColor,
+          paddingTop: insets.top,
+        },
+      ]}
     >
-      <ScrollView
-        contentContainerStyle={styles.scrollContent}
-        keyboardShouldPersistTaps="handled"
-        showsVerticalScrollIndicator={false}
+      <NatureBackground />
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        style={styles.keyboardView}
       >
-        <View style={styles.centerContent}>{children}</View>
-      </ScrollView>
-    </KeyboardAvoidingView>
-  </SafeAreaView>
-);
+        <ScrollView
+          contentContainerStyle={[
+            styles.scrollContent,
+            {
+              paddingBottom: insets.bottom + spacing.xl,
+            },
+          ]}
+          keyboardShouldPersistTaps="handled"
+          showsVerticalScrollIndicator={false}
+        >
+          <View style={styles.centerContent}>{children}</View>
+        </ScrollView>
+      </KeyboardAvoidingView>
+    </SafeAreaView>
+  );
+};
 
 const styles = StyleSheet.create({
   authShell: {
@@ -202,7 +220,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     paddingHorizontal: spacing.md,
-    paddingVertical: spacing.lg,
+    paddingTop: spacing.lg,
   },
   error: { color: '#d9534f' },
   fields: {
