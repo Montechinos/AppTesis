@@ -3,7 +3,7 @@ import { Tabs } from 'expo-router';
 import 'react-native-reanimated';
 import { StatusBar } from 'expo-status-bar';
 import { PaperProvider } from 'react-native-paper';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { AuthScreen } from '@/src/components/organisms/AuthScreen';
 import { TabIcon } from '@/src/components/atoms/TabIcon';
@@ -82,6 +82,7 @@ const PaperShell = () => {
 const RootContent = () => {
   const auth = useAuth();
   const { colors, isDark } = useThemeMode();
+  const insets = useSafeAreaInsets();
 
   if (auth.loading) {
     return <LoadingState label="Iniciando app..." />;
@@ -108,8 +109,8 @@ const RootContent = () => {
           tabBarStyle: {
             backgroundColor: colors.surface,
             borderTopColor: colors.border,
-            height: 68,
-            paddingBottom: 10,
+            height: 64 + insets.bottom,
+            paddingBottom: insets.bottom > 0 ? insets.bottom : 10,
             paddingTop: 10,
           },
         }}
