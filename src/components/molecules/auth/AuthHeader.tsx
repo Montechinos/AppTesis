@@ -23,7 +23,7 @@ export const AuthHeader = ({ subtitle, title }: Props) => {
   const scale = useSharedValue(0.9);
 
   useEffect(() => {
-    scale.value = withTiming(1, { duration: 550 });
+    scale.value = withTiming(1, { duration: 680 });
   }, [scale]);
 
   const logoStyle = useAnimatedStyle(() => ({
@@ -33,7 +33,7 @@ export const AuthHeader = ({ subtitle, title }: Props) => {
   return (
     <View style={styles.container}>
       <Animated.View
-        entering={FadeIn.duration(500)}
+        entering={FadeIn.duration(620).delay(80)}
         style={[
           styles.logoWrap,
           {
