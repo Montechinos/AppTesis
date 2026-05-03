@@ -1,17 +1,23 @@
 import { Link, Stack } from 'expo-router';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
-import { Text, View } from '@/components/Themed';
+import { AppText } from '@/src/components/atoms/AppText';
+import { PrimaryButton } from '@/src/components/atoms/PrimaryButton';
+import { colors } from '@/src/theme/colors';
 
 export default function NotFoundScreen() {
   return (
     <>
-      <Stack.Screen options={{ title: 'Oops!' }} />
+      <Stack.Screen options={{ title: 'No encontrada' }} />
       <View style={styles.container}>
-        <Text style={styles.title}>This screen doesn't exist.</Text>
-
+        <AppText style={styles.title} weight="bold">
+          La ruta no existe.
+        </AppText>
+        <AppText style={styles.text} tone="muted">
+          Regresa al panel principal del invernadero.
+        </AppText>
         <Link href="/" style={styles.link}>
-          <Text style={styles.linkText}>Go to home screen!</Text>
+          <PrimaryButton label="Ir al dashboard" onPress={() => undefined} />
         </Link>
       </View>
     </>
@@ -22,19 +28,18 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
+    backgroundColor: colors.background,
     justifyContent: 'center',
-    padding: 20,
+    padding: 24,
   },
   title: {
-    fontSize: 20,
-    fontWeight: 'bold',
+    fontSize: 22,
+  },
+  text: {
+    fontSize: 14,
+    marginTop: 8,
   },
   link: {
-    marginTop: 15,
-    paddingVertical: 15,
-  },
-  linkText: {
-    fontSize: 14,
-    color: '#2e78b7',
+    marginTop: 16,
   },
 });
