@@ -14,7 +14,7 @@ const controlDefaults: ControlData = {
 
 export const subscribeToControl = (onData: (data: ControlData) => void) =>
   subscribeToPath<ControlData>(greenhousePaths.control, (data) => {
-    onData({ ...controlDefaults, ...data });
+    onData({ ...controlDefaults, ...(data ?? {}) });
   });
 
 export const updateControlValue = async (
