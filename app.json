@@ -1,17 +1,17 @@
 {
   "expo": {
-    "name": "smart-greenhouse",
-    "slug": "smart-greenhouse",
+    "name": "invernadero inteligente",
+    "slug": "invernadero-inteligente",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "smartgreenhouse",
-    "userInterfaceStyle": "automatic",
+    "scheme": "invernaderoapp",
+    "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "splash": {
       "image": "./assets/images/splash-icon.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#e6f6ef"
     },
     "ios": {
       "supportsTablet": true
@@ -19,7 +19,7 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#e6f6ef"
       },
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false
