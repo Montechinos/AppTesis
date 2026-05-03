@@ -27,6 +27,12 @@ export const AuthScreen = () => {
   const [message, setMessage] = useState('');
   const isRegister = mode === 'register';
 
+  const switchMode = (nextMode: Mode) => {
+    setMessage('');
+    auth.clearError();
+    setMode(nextMode);
+  };
+
   if (auth.loading) {
     return <LoadingState label="Preparando sesion segura..." />;
   }
@@ -146,7 +152,7 @@ export const AuthScreen = () => {
               <AuthButton label={isRegister ? 'Crear cuenta' : 'Iniciar sesión'} onPress={submit} />
               <AuthSwitcher
                 action={isRegister ? 'Inicia sesión' : 'Regístrate'}
-                onPress={() => setMode(isRegister ? 'login' : 'register')}
+                onPress={() => switchMode(isRegister ? 'login' : 'register')}
                 prompt={isRegister ? '¿Ya tienes una cuenta? ' : '¿No tienes una cuenta? '}
               />
             </Animated.View>
