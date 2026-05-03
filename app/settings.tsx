@@ -10,7 +10,6 @@ import { SectionHeading } from '@/src/components/atoms/SectionHeading';
 import { SurfaceCard } from '@/src/components/molecules/SurfaceCard';
 import { useAuth } from '@/src/hooks/useAuth';
 import { useThemeMode } from '@/src/hooks/useThemeMode';
-import { spacing } from '@/src/theme/spacing';
 import { validatePassword } from '@/src/utils/validators';
 
 export default function SettingsScreen() {
@@ -88,17 +87,6 @@ export default function SettingsScreen() {
         <AppText tone="muted">Los controles manuales escriben en Firebase Realtime Database.</AppText>
       </SurfaceCard>
 
-      <SurfaceCard>
-        <AppText weight="semibold">Acerca de los creadores</AppText>
-        <AppText>Jhostin</AppText>
-        <AppText>Damian</AppText>
-        <AppText tone="muted">Especialidad: informatica.</AppText>
-        <View style={styles.creatorPhotos}>
-          <View style={styles.creatorPhoto}><AppText tone="muted">Foto</AppText></View>
-          <View style={styles.creatorPhoto}><AppText tone="muted">Foto</AppText></View>
-        </View>
-      </SurfaceCard>
-
       <AppButton icon="logout" label="Cerrar sesion" onPress={auth.logout} variant="danger" />
     </ScreenView>
   );
@@ -114,16 +102,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: 64,
   },
-  creatorPhoto: {
-    alignItems: 'center',
-    borderColor: '#cde8dc',
-    borderRadius: 12,
-    borderWidth: 1,
-    flex: 1,
-    height: 92,
-    justifyContent: 'center',
-  },
-  creatorPhotos: { flexDirection: 'row', gap: spacing.sm },
   error: { color: '#d9534f' },
   profile: { flexDirection: 'row', gap: spacing.md },
   profileText: { flex: 1, gap: 4 },
