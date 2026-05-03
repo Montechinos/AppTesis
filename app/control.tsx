@@ -6,6 +6,7 @@ import { AlertBanner } from '@/src/components/molecules/AlertBanner';
 import { ConnectionBanner } from '@/src/components/molecules/ConnectionBanner';
 import { InfoBanner } from '@/src/components/molecules/InfoBanner';
 import { ControlPanel } from '@/src/components/organisms/ControlPanel';
+import { ControlSummary } from '@/src/components/organisms/ControlSummary';
 
 export default function ControlScreen() {
   const state = useGreenhouse();
@@ -33,6 +34,7 @@ export default function ControlScreen() {
       ) : null}
       {state.savingKey ? <InfoBanner message={`Guardando ${state.savingKey}...`} /> : null}
       {state.saveError ? <InfoBanner message={state.saveError} tone="danger" /> : null}
+      <ControlSummary control={state.control} />
       <ControlPanel
         control={state.control}
         hasWater={state.sensors.hayAgua}
