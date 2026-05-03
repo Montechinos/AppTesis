@@ -1,50 +1,38 @@
 # Invernadero Inteligente
 
-App movil creada con Expo + React Native + TypeScript + Expo Router para monitorear y controlar un invernadero conectado a un ESP32 por medio de Firebase Realtime Database.
+App movil con Expo, React Native, TypeScript, Expo Router, Supabase Auth y Firebase Realtime Database para monitorear y controlar un invernadero conectado a un ESP32.
 
 ## Stack
 
 - Expo Router
-- React Native
-- TypeScript
-- Firebase Realtime Database
-- Atomic Design
-
-## Arquitectura
-
-- `app/`: rutas principales con navegacion inferior.
-- `src/components/`: atomos, moleculas y organismos reutilizables.
-- `src/config/`: inicializacion de Firebase.
-- `src/context/`: estado global compartido del invernadero.
-- `src/hooks/`: suscripciones y logica de presentacion.
-- `src/services/`: acceso a sensores, control y camara.
-- `src/theme/`: colores, espaciado y sombras.
-- `src/types/`: modelos del dominio.
-- `src/utils/`: formateo, alertas e historial local.
-
-## Firebase
-
-Base RTDB:
-
-`https://appinvernadero-4f601-default-rtdb.firebaseio.com`
-
-Rutas usadas:
-
-- `/invernadero/sensores`
-- `/invernadero/control`
-- `/invernadero/camara`
+- React Native + TypeScript
+- Supabase Auth para login, registro, verificacion de correo y sesion persistente
+- Firebase Realtime Database solo para sensores y control
+- React Native Reanimated + Gesture Handler
+- React Native Paper
+- Expo Vector Icons
+- AsyncStorage
+- Expo Linear Gradient
 
 ## Instalacion
 
-1. Instala dependencias:
-   `npm install`
-2. Crea tu archivo `.env` a partir de `.env.example`.
-3. Completa las variables `EXPO_PUBLIC_FIREBASE_*`.
-4. Inicia el proyecto:
-   `npx expo start`
-5. Prueba la app desde tu celular con Expo Go.
+```bash
+npm install
+npx expo start
+```
+
+Tambien puedes usar:
+
+```bash
+npm run typecheck
+npm run android
+npm run ios
+npm run web
+```
 
 ## Variables de entorno
+
+Crea `.env` desde `.env.example`.
 
 ```env
 EXPO_PUBLIC_FIREBASE_API_KEY=
@@ -54,30 +42,101 @@ EXPO_PUBLIC_FIREBASE_PROJECT_ID=
 EXPO_PUBLIC_FIREBASE_STORAGE_BUCKET=
 EXPO_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=
 EXPO_PUBLIC_FIREBASE_APP_ID=
+EXPO_PUBLIC_SUPABASE_URL=
+EXPO_PUBLIC_SUPABASE_ANON_KEY=
 ```
 
-## Reglas temporales para pruebas
+## Supabase
 
-Usa `firebase.rules.example.json` solo durante pruebas controladas.
+La autenticacion usa `src/config/supabase.ts`.
+
+- Register pide nombre, correo, contraseña y confirmacion.
+- Supabase envia el correo de verificacion.
+- La app solo entra al panel si existe sesion y `email_confirmed_at`.
+- El perfil se intenta guardar en una tabla `profiles` con columnas sugeridas: `id`, `name`, `email`, `avatar_url`, `updated_at`.
+- Si `profiles` aun no existe, la app no se rompe y deja advertencia en consola.
+
+## Firebase RTDB
+
+Firebase se conserva solo para datos del invernadero:
+
+- `/invernadero/sensores`
+- `/invernadero/control`
+
+Estructura esperada de sensores:
 
 ```json
 {
-  "rules": {
-    ".read": true,
-    ".write": true
-  }
+  "temp1": 25.2,
+  "hum1": 70,
+  "temp2": 24.8,
+  "hum2": 68,
+  "suelo1": 55,
+  "suelo2": 60,
+  "hayAgua": true,
+  "foco": false,
+  "ventilador": true,
+  "bomba1": false,
+  "bomba2": false,
+  "modoAuto": true,
+  "wifi": true,
+  "ip": "192.168.1.20",
+  "uptime": "01:12:30",
+  "dht1Error": false,
+  "dht2Error": false
 }
 ```
 
-En produccion debes cerrar estas reglas y autenticar a los clientes antes de permitir lectura o escritura.
+Estructura esperada de control:
 
-## Ejecucion util
+```json
+{
+  "modoAuto": false,
+  "foco": false,
+  "ventilador": false,
+  "bomba1": false,
+  "bomba2": false
+}
+```
 
-- `npm run typecheck`
-- `npx expo start`
+## Arquitectura
 
-## Notas de prueba
+- `app/`: tabs finales `Principal`, `Control`, `Historial`, `Configuracion`.
+- `src/components/`: atomos, moleculas y organismos reutilizables.
+- `src/config/`: clientes Firebase y Supabase.
+- `src/context/`: estado global del invernadero.
+- `src/hooks/`: auth, tema, sensores, control, historial y red.
+- `src/services/`: acceso a Supabase Auth y Firebase RTDB.
+- `src/theme/`: paleta clara/oscura, espaciado y tipografia.
+- `src/types/`: modelos del dominio.
+- `src/utils/`: validadores, alertas, formateadores e historial visual.
 
-- Si la camara devuelve una URL fija, la app agrega un query param para forzar refresco cada segundo.
-- Si Firebase aun no tiene nodos creados, la app muestra estados vacios y advertencias en lugar de fallar.
-- La escritura de bombas se bloquea cuando `hayAgua` es `false`.
+## Funcionalidad
+
+- Registro/Login con Supabase Auth y verificacion de correo.
+- Sesion persistente.
+- Modo claro/oscuro persistido con AsyncStorage.
+- Fondo visual natural con degradado y formas animadas.
+- Firebase en tiempo real para sensores y controles.
+- Bloqueo de bombas si `hayAgua` es `false`.
+- Bloqueo visual de bombas en modo automatico.
+- Historial local persistente de eventos.
+- Seleccion persistente de una planta activa.
+- Configuracion con datos de usuario, cambio de nombre, cambio de contraseña, ayuda, creadores y cerrar sesion.
+
+## Dependencias principales instaladas
+
+- `@supabase/supabase-js`
+- `firebase`
+- `@react-native-async-storage/async-storage`
+- `react-native-paper`
+- `react-native-gesture-handler`
+- `react-native-reanimated`
+- `expo-linear-gradient`
+- `@expo/vector-icons`
+
+## Commits realizados
+
+- `🔧 chore(deps): instalar supabase y persistencia local`
+- `✨ feat(auth): integrar supabase y tabs principales`
+- `🔧 chore(deps): configurar gestures y paper`
