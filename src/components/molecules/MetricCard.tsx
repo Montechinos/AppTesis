@@ -33,5 +33,5 @@ export const MetricCard = ({ icon, label, value, detail }: Props) => (
 const styles = StyleSheet.create({
   header: { alignItems: 'center', flexDirection: 'row', gap: 10 },
   value: { color: colors.text, fontSize: 26 },
-  detail: { fontSize: 12 },
+  detail: { fontSize: 12, lineHeight: 16 },
 });
