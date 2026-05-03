@@ -11,12 +11,12 @@ type Props = {
 
 export const DashboardHero = ({ sensors }: Props) => (
   <HeroCard
-    subtitle={`IP ${sensors.ip} • Uptime ${sensors.uptime}`}
+    subtitle={`IP ${sensors.ip} | Uptime ${sensors.uptime}`}
     title="Invernadero inteligente"
   >
     <View style={{ flexDirection: 'row', gap: 10, flexWrap: 'wrap' }}>
       <StatusBadge
-        label={sensors.modoAuto ? 'Modo automático' : 'Modo manual'}
+        label={sensors.modoAuto ? 'Modo automatico' : 'Modo manual'}
         tone={sensors.modoAuto ? 'success' : 'warning'}
       />
       <StatusBadge label={sensors.wifi ? 'WiFi estable' : 'Sin WiFi'} tone={sensors.wifi ? 'info' : 'danger'} />

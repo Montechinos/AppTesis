@@ -36,7 +36,7 @@ export default function RootLayout() {
         <Tabs.Screen
           name="camera"
           options={{
-            title: 'Cámara',
+            title: 'Camara',
             tabBarIcon: ({ focused }) => <TabIcon focused={focused} name="cctv" />,
           }}
         />

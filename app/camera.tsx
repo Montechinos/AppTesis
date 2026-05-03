@@ -18,7 +18,7 @@ export default function CameraScreen() {
   return (
     <ScreenView>
       <SectionHeading
-        subtitle="Imagen actualizada automáticamente cada segundo."
+        subtitle="Imagen actualizada automaticamente cada segundo."
         title="Vigilancia"
       />
       <ConnectionBanner isChecking={state.isChecking} isOffline={state.isOffline} />

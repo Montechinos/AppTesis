@@ -16,7 +16,7 @@ export const buildAlerts = (data: SensorData): AlertItem[] => {
     alerts.push({
       id: 'temp',
       title: 'Temperatura alta',
-      description: 'Uno de los sensores superó los 30°C.',
+      description: 'Uno de los sensores supero los 30 C.',
       severity: 'medium',
     });
   }
@@ -25,7 +25,7 @@ export const buildAlerts = (data: SensorData): AlertItem[] => {
     alerts.push({
       id: 'soil',
       title: 'Suelo seco',
-      description: 'La humedad del suelo bajó de 30% en una zona.',
+      description: 'La humedad del suelo bajo de 30% en una zona.',
       severity: 'medium',
     });
   }

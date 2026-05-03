@@ -1,6 +1,6 @@
 export const formatPercent = (value: number) => `${Math.round(value)}%`;
 
-export const formatTemp = (value: number) => `${value.toFixed(1)}°C`;
+export const formatTemp = (value: number) => `${value.toFixed(1)} C`;
 
 export const formatBoolean = (value: boolean, truthy: string, falsy: string) =>
   value ? truthy : falsy;

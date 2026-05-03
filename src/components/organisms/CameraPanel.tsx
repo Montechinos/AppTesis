@@ -20,11 +20,11 @@ export const CameraPanel = ({ camera, imageUri, onRefresh }: Props) => (
     {camera.capture ? (
       <Image source={{ uri: imageUri }} style={styles.image} />
     ) : (
-      <EmptyState icon="cctv-off" message="Cámara no disponible" />
+      <EmptyState icon="cctv-off" message="Camara no disponible" />
     )}
     <View style={styles.footer}>
       <View style={{ flex: 1 }}>
-        <AppText weight="semibold">IP cámara: {camera.ip || '--'}</AppText>
+        <AppText weight="semibold">IP camara: {camera.ip || '--'}</AppText>
         <AppText tone="muted">Actualizado: {formatUpdatedAt(camera.actualizado)}</AppText>
       </View>
       <PrimaryButton label="Refrescar" onPress={onRefresh} />
