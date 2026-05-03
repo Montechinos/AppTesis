@@ -17,6 +17,12 @@ npm.cmd run typecheck
 npx.cmd expo start -c
 ```
 
+La app usa:
+
+- Nombre: `Invernadero Inteligente`
+- Android package: `com.jhostin.invernadero`
+- Icono y splash: `assets/logo.png`
+
 ## Instalar EAS CLI
 
 ```powershell
@@ -60,4 +66,4 @@ Al terminar, EAS mostrara un enlace de descarga. Abre ese enlace desde el celula
 2. Abre el archivo en el celular.
 3. Si Android bloquea la instalacion, habilita "Instalar apps desconocidas" para el navegador o gestor de archivos.
 4. Instala la app.
-5. Abre "Invernadero inteligente".
+5. Abre "Invernadero Inteligente".
