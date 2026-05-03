@@ -9,5 +9,5 @@ const cameraDefaults: CameraData = {
 
 export const subscribeToCamera = (onData: (data: CameraData) => void) =>
   subscribeToPath<CameraData>(greenhousePaths.camera, (data) => {
-    onData({ ...cameraDefaults, ...data });
+    onData({ ...cameraDefaults, ...(data ?? {}) });
   });
