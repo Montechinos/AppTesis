@@ -3,6 +3,7 @@ import { Tabs } from 'expo-router';
 import 'react-native-reanimated';
 import { StatusBar } from 'expo-status-bar';
 import { PaperProvider } from 'react-native-paper';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import { AuthScreen } from '@/src/components/organisms/AuthScreen';
 import { TabIcon } from '@/src/components/atoms/TabIcon';
@@ -13,11 +14,13 @@ import { LoadingState } from '@/src/components/atoms/LoadingState';
 
 export default function RootLayout() {
   return (
-    <ThemeProvider>
-      <AuthProvider>
-        <PaperShell />
-      </AuthProvider>
-    </ThemeProvider>
+    <SafeAreaProvider>
+      <ThemeProvider>
+        <AuthProvider>
+          <PaperShell />
+        </AuthProvider>
+      </ThemeProvider>
+    </SafeAreaProvider>
   );
 }
 
