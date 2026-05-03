@@ -1,6 +1,8 @@
+import 'react-native-gesture-handler';
 import { Tabs } from 'expo-router';
 import 'react-native-reanimated';
 import { StatusBar } from 'expo-status-bar';
+import { PaperProvider } from 'react-native-paper';
 
 import { AuthScreen } from '@/src/components/organisms/AuthScreen';
 import { TabIcon } from '@/src/components/atoms/TabIcon';
@@ -13,11 +15,66 @@ export default function RootLayout() {
   return (
     <ThemeProvider>
       <AuthProvider>
-        <RootContent />
+        <PaperShell />
       </AuthProvider>
     </ThemeProvider>
   );
 }
+
+const PaperShell = () => {
+  const { colors, isDark } = useThemeMode();
+
+  return (
+    <PaperProvider
+      theme={{
+        dark: isDark,
+        colors: {
+          backdrop: 'rgba(0, 0, 0, 0.35)',
+          background: colors.background,
+          elevation: {
+            level0: 'transparent',
+            level1: colors.surface,
+            level2: colors.surface,
+            level3: colors.surfaceMuted,
+            level4: colors.surfaceMuted,
+            level5: colors.surfaceMuted,
+          },
+          error: colors.danger,
+          inverseOnSurface: colors.surface,
+          inversePrimary: colors.secondary,
+          inverseSurface: colors.text,
+          onBackground: colors.text,
+          onError: colors.surface,
+          onErrorContainer: colors.text,
+          onPrimary: colors.surface,
+          onPrimaryContainer: colors.text,
+          onSecondary: colors.surface,
+          onSecondaryContainer: colors.text,
+          onSurface: colors.text,
+          onSurfaceDisabled: colors.textMuted,
+          onSurfaceVariant: colors.textMuted,
+          onTertiary: colors.text,
+          onTertiaryContainer: colors.text,
+          outline: colors.border,
+          outlineVariant: colors.border,
+          primary: colors.primary,
+          primaryContainer: colors.surfaceMuted,
+          scrim: 'rgba(0, 0, 0, 0.35)',
+          secondary: colors.secondary,
+          secondaryContainer: colors.surfaceMuted,
+          shadow: colors.shadow,
+          surface: colors.surface,
+          surfaceDisabled: colors.surfaceMuted,
+          surfaceVariant: colors.surfaceMuted,
+          tertiary: colors.accent,
+          tertiaryContainer: colors.surfaceMuted,
+        },
+      }}
+    >
+      <RootContent />
+    </PaperProvider>
+  );
+};
 
 const RootContent = () => {
   const auth = useAuth();
