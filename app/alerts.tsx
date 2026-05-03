@@ -1,11 +1,11 @@
 import { ScreenView } from '@/src/components/atoms/ScreenView';
 import { SectionHeading } from '@/src/components/atoms/SectionHeading';
+import { useGreenhouse } from '@/src/context/GreenhouseProvider';
 import { ConnectionBanner } from '@/src/components/molecules/ConnectionBanner';
 import { AlertsPanel } from '@/src/components/organisms/AlertsPanel';
-import { useGreenhouseSystem } from '@/src/hooks/useGreenhouseSystem';
 
 export default function AlertsScreen() {
-  const state = useGreenhouseSystem();
+  const state = useGreenhouse();
 
   return (
     <ScreenView>
