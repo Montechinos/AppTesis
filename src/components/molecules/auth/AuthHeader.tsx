@@ -68,18 +68,18 @@ const styles = StyleSheet.create({
     gap: spacing.xs,
   },
   logo: {
-    height: 96,
-    width: 96,
+    height: 110,
+    width: 110,
   },
   logoWrap: {
     alignItems: 'center',
     borderRadius: 36,
     elevation: 5,
-    height: 116,
+    height: 128,
     justifyContent: 'center',
     shadowOffset: { height: 10, width: 0 },
     shadowRadius: 22,
-    width: 116,
+    width: 128,
   },
   subtitle: {
     fontSize: 15,
