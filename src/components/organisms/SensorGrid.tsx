@@ -10,7 +10,7 @@ type Props = {
 
 export const SensorGrid = ({ sensors }: Props) => (
   <View style={{ gap: 12 }}>
-    <View style={{ flexDirection: 'row', gap: 12 }}>
+    <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 12 }}>
       <View style={{ flex: 1 }}>
         <MetricCard detail="DHT1 ambiente" icon="thermometer" label="Temperatura 1" value={formatTemp(sensors.temp1)} />
       </View>
@@ -18,7 +18,7 @@ export const SensorGrid = ({ sensors }: Props) => (
         <MetricCard detail="DHT1 ambiente" icon="water-percent" label="Humedad 1" value={formatPercent(sensors.hum1)} />
       </View>
     </View>
-    <View style={{ flexDirection: 'row', gap: 12 }}>
+    <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 12 }}>
       <View style={{ flex: 1 }}>
         <MetricCard detail="DHT2 ambiente" icon="thermometer-lines" label="Temperatura 2" value={formatTemp(sensors.temp2)} />
       </View>
