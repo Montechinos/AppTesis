@@ -1,6 +1,6 @@
 import { Text, TextProps } from 'react-native';
 
-import { colors } from '@/src/theme/colors';
+import { useThemeMode } from '@/src/hooks/useThemeMode';
 import { typography } from '@/src/theme/typography';
 
 type Props = TextProps & {
@@ -14,27 +14,30 @@ const fontWeightMap = {
   bold: '700',
 } as const;
 
-const colorMap = {
-  default: colors.text,
-  muted: colors.textMuted,
-  inverse: colors.surface,
-};
-
 export const AppText = ({
   style,
   tone = 'default',
   weight = 'regular',
   ...props
-}: Props) => (
-  <Text
-    {...props}
-    style={[
-      {
-        color: colorMap[tone],
-        fontSize: typography.body,
-        fontWeight: fontWeightMap[weight],
-      },
-      style,
-    ]}
-  />
-);
+}: Props) => {
+  const { colors } = useThemeMode();
+  const colorMap = {
+    default: colors.text,
+    muted: colors.textMuted,
+    inverse: colors.surface,
+  };
+
+  return (
+    <Text
+      {...props}
+      style={[
+        {
+          color: colorMap[tone],
+          fontSize: typography.body,
+          fontWeight: fontWeightMap[weight],
+        },
+        style,
+      ]}
+    />
+  );
+};

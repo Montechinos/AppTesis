@@ -1,7 +1,7 @@
 import { StyleSheet, Switch, View } from 'react-native';
 
 import { AppText } from '@/src/components/atoms/AppText';
-import { colors } from '@/src/theme/colors';
+import { useThemeMode } from '@/src/hooks/useThemeMode';
 
 type Props = {
   label: string;
@@ -10,20 +10,24 @@ type Props = {
   onChange: (value: boolean) => void;
 };
 
-export const AppSwitch = ({ label, value, disabled, onChange }: Props) => (
-  <View style={styles.container}>
-    <AppText style={styles.label} weight="semibold">
-      {label}
-    </AppText>
-    <Switch
-      disabled={disabled}
-      onValueChange={onChange}
-      thumbColor={colors.surface}
-      trackColor={{ false: colors.border, true: colors.primary }}
-      value={value}
-    />
-  </View>
-);
+export const AppSwitch = ({ label, value, disabled, onChange }: Props) => {
+  const { colors } = useThemeMode();
+
+  return (
+    <View style={styles.container}>
+      <AppText style={styles.label} weight="semibold">
+        {label}
+      </AppText>
+      <Switch
+        disabled={disabled}
+        onValueChange={onChange}
+        thumbColor={colors.surface}
+        trackColor={{ false: colors.border, true: colors.primary }}
+        value={value}
+      />
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {

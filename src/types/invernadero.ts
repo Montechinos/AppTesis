@@ -21,6 +21,8 @@ export interface SensorData {
   wifi: boolean;
   ip: string;
   uptime: string;
+  dht1Error?: boolean;
+  dht2Error?: boolean;
 }
 
 export interface ControlData {
@@ -49,4 +51,13 @@ export interface AlertItem {
   title: string;
   description: string;
   severity: 'high' | 'medium' | 'low';
+}
+
+export interface HistoryEvent {
+  id: string;
+  title: string;
+  description: string;
+  timestamp: number;
+  source: 'manual' | 'automatico';
+  tone: 'info' | 'success' | 'warning' | 'danger';
 }

@@ -11,3 +11,11 @@ export const formatUpdatedAt = (value: string) => {
 };
 
 export const formatUptime = (value: string) => value || '--';
+
+export const formatDateTime = (value: number) =>
+  new Date(value).toLocaleString(undefined, {
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    month: 'short',
+  });

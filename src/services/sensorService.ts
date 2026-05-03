@@ -17,6 +17,8 @@ export const sensorDefaults: SensorData = {
   wifi: false,
   ip: '--',
   uptime: '--',
+  dht1Error: false,
+  dht2Error: false,
 };
 
 export const subscribeToSensors = (

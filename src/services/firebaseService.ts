@@ -3,7 +3,6 @@ import { onValue, ref, set } from 'firebase/database';
 import { realtimeDb } from '@/src/config/firebase';
 
 export const greenhousePaths = {
-  camera: 'invernadero/camara',
   control: 'invernadero/control',
   sensors: 'invernadero/sensores',
 } as const;

@@ -24,5 +24,5 @@ export const useSensorStream = () => {
     return unsubscribe;
   }, []);
 
-  return { sensors, history, loading, error };
+  return { sensors, sensorHistory: history, loading, error };
 };
