@@ -1,6 +1,7 @@
 import { Text, TextProps } from 'react-native';
 
 import { colors } from '@/src/theme/colors';
+import { typography } from '@/src/theme/typography';
 
 type Props = TextProps & {
   tone?: 'default' | 'muted' | 'inverse';
@@ -30,7 +31,7 @@ export const AppText = ({
     style={[
       {
         color: colorMap[tone],
-        fontSize: 14,
+        fontSize: typography.body,
         fontWeight: fontWeightMap[weight],
       },
       style,
