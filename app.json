@@ -1,15 +1,15 @@
 {
   "expo": {
-    "name": "invernadero inteligente",
+    "name": "Invernadero inteligente",
     "slug": "invernadero-inteligente",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/logo.png",
     "scheme": "invernaderoapp",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "splash": {
-      "image": "./assets/images/splash-icon.png",
+      "image": "./assets/logo.png",
       "resizeMode": "contain",
       "backgroundColor": "#e6f6ef"
     },
@@ -17,8 +17,9 @@
       "supportsTablet": true
     },
     "android": {
+      "package": "com.jhostin.invernaderointeligente",
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "foregroundImage": "./assets/logo.png",
         "backgroundColor": "#e6f6ef"
       },
       "edgeToEdgeEnabled": true,
