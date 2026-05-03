@@ -8,10 +8,10 @@ import { HistoryPanel } from '@/src/components/organisms/HistoryPanel';
 import { SensorGrid } from '@/src/components/organisms/SensorGrid';
 import { SoilStatusPanel } from '@/src/components/organisms/SoilStatusPanel';
 import { SystemStatusPanel } from '@/src/components/organisms/SystemStatusPanel';
-import { useGreenhouseSystem } from '@/src/hooks/useGreenhouseSystem';
+import { useGreenhouse } from '@/src/context/GreenhouseProvider';
 
 export default function DashboardScreen() {
-  const state = useGreenhouseSystem();
+  const state = useGreenhouse();
 
   if (state.loading) {
     return <LoadingState />;
