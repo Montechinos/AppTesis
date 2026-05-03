@@ -8,7 +8,7 @@ import {
   updatePassword,
   updateUserName,
 } from '@/src/services/auth/authService';
-import { supabase } from '@/src/config/supabase';
+import { isSupabaseConfigured, supabase } from '@/src/config/supabase';
 
 type AuthContextValue = {
   error: string;
@@ -37,6 +37,12 @@ export const AuthProvider = ({ children }: Props) => {
   const [error, setError] = useState('');
 
   useEffect(() => {
+    if (!isSupabaseConfigured) {
+      setError('Configura EXPO_PUBLIC_SUPABASE_URL y EXPO_PUBLIC_SUPABASE_ANON_KEY en .env.');
+      setLoading(false);
+      return undefined;
+    }
+
     supabase.auth.getSession().then(({ data }) => {
       setSession(data.session);
       setLoading(false);

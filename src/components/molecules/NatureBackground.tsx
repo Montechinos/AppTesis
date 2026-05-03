@@ -29,7 +29,7 @@ export const NatureBackground = () => {
   }));
 
   return (
-    <View pointerEvents="none" style={StyleSheet.absoluteFill}>
+    <View style={[StyleSheet.absoluteFill, styles.noPointerEvents]}>
       <LinearGradient
         colors={isDark ? ['#071612', '#10231d', '#0d1b2a'] : ['#f7fffb', '#e8f9f5', '#eef8ff']}
         style={StyleSheet.absoluteFill}
@@ -54,6 +54,9 @@ const styles = StyleSheet.create({
     right: 28,
     top: 42,
     width: 70,
+  },
+  noPointerEvents: {
+    pointerEvents: 'none',
   },
   primary: {
     backgroundColor: '#b7ead5',
