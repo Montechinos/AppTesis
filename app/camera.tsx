@@ -4,9 +4,7 @@ import { SectionHeading } from '@/src/components/atoms/SectionHeading';
 import { useGreenhouse } from '@/src/context/GreenhouseProvider';
 import { ConnectionBanner } from '@/src/components/molecules/ConnectionBanner';
 import { CameraPanel } from '@/src/components/organisms/CameraPanel';
-
-const buildCameraUri = (capture: string, refreshTick: number) =>
-  capture ? `${capture}${capture.includes('?') ? '&' : '?'}t=${refreshTick}` : '';
+import { buildCameraUri } from '@/src/utils/camera';
 
 export default function CameraScreen() {
   const state = useGreenhouse();
