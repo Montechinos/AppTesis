@@ -14,14 +14,22 @@ const defaults: ControlData = {
 export const useControlState = () => {
   const [control, setControl] = useState<ControlData>(defaults);
   const [savingKey, setSavingKey] = useState<DeviceToggleKey | null>(null);
+  const [saveError, setSaveError] = useState('');
 
   useEffect(() => subscribeToControl(setControl), []);
 
   const setToggle = async (key: DeviceToggleKey, value: boolean) => {
     setSavingKey(key);
-    await updateControlValue(key, value);
-    setSavingKey(null);
+    setSaveError('');
+
+    try {
+      await updateControlValue(key, value);
+    } catch {
+      setSaveError(`No se pudo actualizar ${key}.`);
+    } finally {
+      setSavingKey(null);
+    }
   };
 
-  return { control, savingKey, setToggle };
+  return { control, saveError, savingKey, setToggle };
 };
