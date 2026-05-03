@@ -12,7 +12,10 @@ type Props = {
 export const ConnectionBanner = ({ isChecking, isOffline }: Props) => (
   <SurfaceCard>
     <View style={styles.row}>
-      <AppText weight="semibold">Estado de la app</AppText>
+      <View style={styles.copy}>
+        <AppText weight="semibold">Estado de la app</AppText>
+        <AppText tone="muted">Monitoreo de conectividad del dispositivo.</AppText>
+      </View>
       <StatusBadge
         label={isChecking ? 'Conectando' : isOffline ? 'Offline' : 'Online'}
         tone={isChecking ? 'warning' : isOffline ? 'danger' : 'success'}
@@ -22,9 +25,11 @@ export const ConnectionBanner = ({ isChecking, isOffline }: Props) => (
 );
 
 const styles = StyleSheet.create({
+  copy: { flex: 1, gap: 2 },
   row: {
     alignItems: 'center',
     flexDirection: 'row',
+    gap: 8,
     justifyContent: 'space-between',
   },
 });
