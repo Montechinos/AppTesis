@@ -3,11 +3,12 @@ import 'react-native-reanimated';
 import { StatusBar } from 'expo-status-bar';
 
 import { TabIcon } from '@/src/components/atoms/TabIcon';
+import { GreenhouseProvider } from '@/src/context/GreenhouseProvider';
 import { colors } from '@/src/theme/colors';
 
 export default function RootLayout() {
   return (
-    <>
+    <GreenhouseProvider>
       <StatusBar style="dark" />
       <Tabs
         screenOptions={{
@@ -47,6 +48,6 @@ export default function RootLayout() {
           }}
         />
       </Tabs>
-    </>
+    </GreenhouseProvider>
   );
 }
