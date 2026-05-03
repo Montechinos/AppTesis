@@ -27,6 +27,7 @@ export default function ControlScreen() {
         />
       ) : null}
       {state.savingKey ? <InfoBanner message={`Guardando ${state.savingKey}...`} /> : null}
+      {state.saveError ? <InfoBanner message={state.saveError} tone="danger" /> : null}
       <ControlPanel
         control={state.control}
         hasWater={state.sensors.hayAgua}
