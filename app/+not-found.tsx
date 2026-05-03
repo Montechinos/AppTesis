@@ -2,7 +2,6 @@ import { Link, Stack } from 'expo-router';
 import { StyleSheet, View } from 'react-native';
 
 import { AppText } from '@/src/components/atoms/AppText';
-import { PrimaryButton } from '@/src/components/atoms/PrimaryButton';
 import { colors } from '@/src/theme/colors';
 
 export default function NotFoundScreen() {
@@ -17,7 +16,9 @@ export default function NotFoundScreen() {
           Regresa al panel principal del invernadero.
         </AppText>
         <Link href="/" style={styles.link}>
-          <PrimaryButton label="Ir al dashboard" onPress={() => undefined} />
+          <AppText style={styles.linkText} weight="semibold">
+            Ir al dashboard
+          </AppText>
         </Link>
       </View>
     </>
@@ -41,5 +42,8 @@ const styles = StyleSheet.create({
   },
   link: {
     marginTop: 16,
+  },
+  linkText: {
+    color: colors.secondary,
   },
 });
