@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
-import { SafeAreaView, ScrollView, StyleSheet, View } from 'react-native';
+import { ScrollView, StyleSheet, View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { NatureBackground } from '@/src/components/molecules/NatureBackground';
 import { useThemeMode } from '@/src/hooks/useThemeMode';
@@ -11,19 +12,36 @@ type Props = {
 
 export const ScreenView = ({ children }: Props) => {
   const { colors } = useThemeMode();
+  const insets = useSafeAreaInsets();
 
   return (
-    <SafeAreaView style={[styles.safeArea, { backgroundColor: colors.background }]}>
+    <View
+      style={[
+        styles.safeArea,
+        {
+          backgroundColor: colors.background,
+          paddingTop: insets.top,
+        },
+      ]}
+    >
       <NatureBackground />
-      <ScrollView contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
+      <ScrollView
+        contentContainerStyle={[
+          styles.content,
+          {
+            paddingBottom: 96 + insets.bottom,
+          },
+        ]}
+        showsVerticalScrollIndicator={false}
+      >
         <View style={styles.inner}>{children}</View>
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   safeArea: { flex: 1 },
-  content: { paddingBottom: spacing.xl },
+  content: { flexGrow: 1 },
   inner: { padding: spacing.md, gap: spacing.md },
 });
