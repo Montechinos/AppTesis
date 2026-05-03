@@ -1,3 +1,4 @@
+import { LoadingState } from '@/src/components/atoms/LoadingState';
 import { ScreenView } from '@/src/components/atoms/ScreenView';
 import { SectionHeading } from '@/src/components/atoms/SectionHeading';
 import { useGreenhouse } from '@/src/context/GreenhouseProvider';
@@ -9,6 +10,10 @@ const buildCameraUri = (capture: string, refreshTick: number) =>
 
 export default function CameraScreen() {
   const state = useGreenhouse();
+
+  if (state.loading) {
+    return <LoadingState label="Conectando con la camara..." />;
+  }
 
   return (
     <ScreenView>
