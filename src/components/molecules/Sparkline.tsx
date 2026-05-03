@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import Svg, { Path } from 'react-native-svg';
 
@@ -25,14 +26,18 @@ const buildPath = (values: number[], width: number, height: number) => {
     .join(' ');
 };
 
-export const Sparkline = ({ color, label, values }: Props) => (
-  <View style={styles.container}>
-    <AppText tone="muted">{label}</AppText>
-    <Svg height={52} width="100%">
-      <Path d={buildPath(values, 260, 42)} fill="none" stroke={color} strokeWidth={3} />
-    </Svg>
-  </View>
-);
+export const Sparkline = ({ color, label, values }: Props) => {
+  const [width, setWidth] = useState(260);
+
+  return (
+    <View onLayout={(event) => setWidth(event.nativeEvent.layout.width - 24)} style={styles.container}>
+      <AppText tone="muted">{label}</AppText>
+      <Svg height={52} width="100%">
+        <Path d={buildPath(values, width, 42)} fill="none" stroke={color} strokeWidth={3} />
+      </Svg>
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
