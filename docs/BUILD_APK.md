@@ -17,6 +17,12 @@ npm.cmd run typecheck
 npx.cmd expo start -c
 ```
 
+La app usa:
+
+- Nombre: `Invernadero Inteligente`
+- Android package: `com.jhostin.invernadero`
+- Icono y splash: `assets/logo.png`
+
 ## Instalar EAS CLI
 
 ```powershell
@@ -54,10 +60,25 @@ eas.cmd build --platform android --profile preview
 
 Al terminar, EAS mostrara un enlace de descarga. Abre ese enlace desde el celular Android o descarga el APK y pasalo al dispositivo.
 
+## APK local generado
+
+Tambien se puede generar localmente con Gradle despues de `expo prebuild`:
+
+```powershell
+cd android
+.\gradlew.bat assembleRelease
+```
+
+APK final de demo:
+
+```txt
+dist/apk/Invernadero-Inteligente-demo.apk
+```
+
 ## Instalar en Android
 
 1. Descarga el APK desde el link de EAS.
-2. Abre el archivo en el celular.
+2. O copia al celular `dist/apk/Invernadero-Inteligente-demo.apk`.
 3. Si Android bloquea la instalacion, habilita "Instalar apps desconocidas" para el navegador o gestor de archivos.
 4. Instala la app.
-5. Abre "Invernadero inteligente".
+5. Abre "Invernadero Inteligente".

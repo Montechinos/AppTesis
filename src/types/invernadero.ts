@@ -31,6 +31,15 @@ export interface ControlData {
   ventilador: boolean;
   bomba1: boolean;
   bomba2: boolean;
+  faseActiva?: string;
+  objetivos?: {
+    luzObjetivo: number;
+    aguaObjetivo: number;
+    humedadSueloObjetivo: number;
+    ventilacionObjetivo: number;
+    temperaturaObjetivo: number;
+    humedadAireObjetivo: number;
+  };
 }
 
 export interface SensorSnapshot {

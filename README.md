@@ -62,6 +62,7 @@ Firebase se conserva solo para datos del invernadero:
 
 - `/invernadero/sensores`
 - `/invernadero/control`
+- `/invernadero/plantaActiva`
 
 Estructura esperada de sensores:
 
@@ -95,7 +96,37 @@ Estructura esperada de control:
   "foco": false,
   "ventilador": false,
   "bomba1": false,
-  "bomba2": false
+  "bomba2": false,
+  "faseActiva": "germinacion",
+  "plantaActivaNombre": "Tomate",
+  "objetivos": {
+    "luzObjetivo": 40,
+    "aguaObjetivo": 75,
+    "humedadSueloObjetivo": 80,
+    "ventilacionObjetivo": 35,
+    "temperaturaObjetivo": 22,
+    "humedadAireObjetivo": 75
+  }
+}
+```
+
+Cuando se configura una planta desde la pantalla principal, la app escribe la configuracion completa en `/invernadero/plantaActiva` y activa `modoAuto` en `/invernadero/control`. El ESP32 debe leer `faseActiva` y `objetivos` para decidir foco, ventilador y bombas segun los sensores reales.
+
+Estructura de planta activa:
+
+```json
+{
+  "plantName": "Tomate",
+  "phase": "germinacion",
+  "targets": {
+    "luzObjetivo": 40,
+    "aguaObjetivo": 75,
+    "humedadSueloObjetivo": 80,
+    "ventilacionObjetivo": 35,
+    "temperaturaObjetivo": 22,
+    "humedadAireObjetivo": 75
+  },
+  "createdAt": "2026-05-03T00:00:00.000Z"
 }
 ```
 
