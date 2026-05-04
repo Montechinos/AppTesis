@@ -6,6 +6,8 @@
     "dev": "expo start",
     "start": "expo start",
     "android": "expo run:android",
+    "android:debug-apk": "cd android && gradlew.bat assembleDebug",
+    "android:release-apk": "cd android && gradlew.bat assembleRelease",
     "ios": "expo run:ios",
     "web": "expo start --web",
     "typecheck": "tsc --noEmit"
