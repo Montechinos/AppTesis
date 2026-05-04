@@ -86,6 +86,7 @@ export const ActivePlantPanel = ({ activePlant, onChangePlant, sensors }: Props)
       </View>
 
       <StatusBadge label={`Fase: ${getPlantPhaseLabel(activePlant.phase)}`} tone="info" />
+      <StatusBadge label="Firebase sincronizado | modo automatico activo" tone="success" />
 
       <View style={styles.section}>
         <AppText weight="bold">Condiciones objetivo</AppText>

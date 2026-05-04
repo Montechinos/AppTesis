@@ -28,6 +28,7 @@ export const PlantSetupModal = ({ onClose, onSubmit, visible }: Props) => {
   const { colors } = useThemeMode();
   const [plantName, setPlantName] = useState('');
   const [selectedPhase, setSelectedPhase] = useState<PlantPhase>('germinacion');
+  const [errorMessage, setErrorMessage] = useState('');
   const [isSaving, setIsSaving] = useState(false);
   const animatedValue = useRef(new Animated.Value(0)).current;
 
@@ -47,9 +48,16 @@ export const PlantSetupModal = ({ onClose, onSubmit, visible }: Props) => {
     }
 
     setIsSaving(true);
-    await onSubmit(plantName, selectedPhase);
-    setIsSaving(false);
-    setPlantName('');
+    setErrorMessage('');
+
+    try {
+      await onSubmit(plantName, selectedPhase);
+      setPlantName('');
+    } catch {
+      setErrorMessage('No se pudo guardar en Firebase. Revisa la conexion e intenta otra vez.');
+    } finally {
+      setIsSaving(false);
+    }
   };
 
   const scale = animatedValue.interpolate({
@@ -126,6 +134,12 @@ export const PlantSetupModal = ({ onClose, onSubmit, visible }: Props) => {
                 })}
               </View>
             </View>
+
+            {errorMessage ? (
+              <AppText style={{ color: colors.danger }} weight="semibold">
+                {errorMessage}
+              </AppText>
+            ) : null}
 
             <Pressable
               disabled={!plantName.trim() || isSaving}

@@ -25,7 +25,7 @@ import { radius, spacing } from '@/src/theme/spacing';
 export default function DashboardScreen() {
   const state = useGreenhouse();
   const { colors } = useThemeMode();
-  const { activePlant, configurePlant, isLoadingPlant } = useActivePlant();
+  const { activePlant, configurePlant, isLoadingPlant, plantConfigError } = useActivePlant();
   const [isPlantModalOpen, setIsPlantModalOpen] = useState(false);
 
   if (state.loading) {
@@ -68,6 +68,7 @@ export default function DashboardScreen() {
       )}
       <ConnectionBanner isChecking={state.isChecking} isOffline={state.isOffline} />
       {state.error ? <InfoBanner message={state.error} tone="danger" /> : null}
+      {plantConfigError ? <InfoBanner message={plantConfigError} tone="danger" /> : null}
       <SectionHeading subtitle="Lecturas DHT y ambiente interno." title="Sensores" />
       <SensorGrid sensors={state.sensors} />
       <SectionHeading subtitle="Seguimiento de suelo y servicios del sistema." title="Operacion" />

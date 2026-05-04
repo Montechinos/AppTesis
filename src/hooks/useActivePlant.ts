@@ -10,6 +10,7 @@ import { calculatePlantNeeds } from '@/src/utils/calculatePlantNeeds';
 export const useActivePlant = () => {
   const [activePlant, setActivePlant] = useState<ActivePlantConfig | null>(null);
   const [isLoadingPlant, setIsLoadingPlant] = useState(true);
+  const [plantConfigError, setPlantConfigError] = useState('');
 
   useEffect(() => {
     let isMounted = true;
@@ -18,6 +19,11 @@ export const useActivePlant = () => {
       .then((config) => {
         if (isMounted) {
           setActivePlant(config);
+        }
+      })
+      .catch(() => {
+        if (isMounted) {
+          setPlantConfigError('No se pudo cargar la planta activa desde Firebase.');
         }
       })
       .finally(() => {
@@ -33,6 +39,7 @@ export const useActivePlant = () => {
 
   const configurePlant = useCallback(
     async (plantName: string, phase: PlantPhase) => {
+      setPlantConfigError('');
       const config: ActivePlantConfig = {
         plantName: plantName.trim(),
         phase,
@@ -40,8 +47,8 @@ export const useActivePlant = () => {
         createdAt: new Date().toISOString(),
       };
 
-      setActivePlant(config);
       await saveActivePlantConfig(config);
+      setActivePlant(config);
       return config;
     },
     [],
@@ -53,7 +60,8 @@ export const useActivePlant = () => {
       configurePlant,
       hasActivePlant: Boolean(activePlant),
       isLoadingPlant,
+      plantConfigError,
     }),
-    [activePlant, configurePlant, isLoadingPlant],
+    [activePlant, configurePlant, isLoadingPlant, plantConfigError],
   );
 };
